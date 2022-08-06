@@ -1,0 +1,23 @@
+{
+  "name": "ttw",
+  "version": "0.1.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "chcp 65001 && electron . --develop --debug-mode"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ruiewo/ttw.git"
+  },
+  "author": "ruiewo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ruiewo/ttw/issues"
+  },
+  "homepage": "https://github.com/ruiewo/ttw#readme",
+  "dependencies": {
+    "electron": "^20.0.1",
+    "electron-builder": "^23.3.3"
+  }
+}
