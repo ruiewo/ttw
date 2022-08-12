@@ -28,7 +28,7 @@
       "index.html"
     ],
     "win": {
-      "icon": "build/style/img/wtt.png",
+      "icon": "build/style/img/ttw.png",
       "publish": {
         "provider": "github",
         "owner": "ruiewo"
