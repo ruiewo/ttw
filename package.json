@@ -17,13 +17,14 @@
     "url": "https://github.com/ruiewo/ttw/issues"
   },
   "homepage": "https://github.com/ruiewo/ttw#readme",
-  "dependencies": {
+  "devDependencies": {
     "electron": "^20.0.1",
     "electron-builder": "^23.3.3"
   },
   "build": {
     "appId": "tidyup.tackless.work",
     "files": [
+      "build",
       "package.json",
       "package-lock.json",
       "main.js",
