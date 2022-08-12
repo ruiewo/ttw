@@ -4,7 +4,30 @@ const { autoUpdater } = require("electron-updater");
 initialize();
 
 function initialize() {
-  autoUpdater.checkForUpdatesAndNotify();
+  // autoUpdater.checkForUpdatesAndNotify();
+  autoUpdater.checkForUpdates();
+
+  autoUpdater.on("update-downloaded", (info) => {
+    const dialogOpts = {
+      type: "info",
+      buttons: ["Restart", "Later"],
+      message: "UPDATE",
+      detail:
+        "A new version has been downloaded. Restart the application to apply the updates."
+    };
+
+    dialog.showMessageBox(mainWin, dialogOpts).then((returnValue) => {
+      if (returnValue.response === 0) {
+        autoUpdater.quitAndInstall();
+      }
+    });
+  });
+
+  autoUpdater.on("error", (err) => {
+    console.error("There was a problem updating the application!");
+    console.error(err);
+  });
+
   // if (app.isPackaged) {
   //   const server = "https://your-deployment-url.com";
   //   const url = `${server}/update/${process.platform}/${app.getVersion()}`;
