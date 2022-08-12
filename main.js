@@ -1,4 +1,4 @@
-const { app, autoUpdater, dialog, BrowserWindow } = require("electron");
+const { app, dialog, BrowserWindow } = require("electron");
 const { autoUpdater } = require("electron-updater");
 
 initialize();

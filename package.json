@@ -6,7 +6,7 @@
   "scripts": {
     "start": "chcp 65001 && electron . --develop --debug-mode",
     "build": "electron-builder --win --x64 --publish never",
-    "publish": "electron-builder --publish always"
+    "publish": "electron-builder --win --x64 --publish always"
   },
   "repository": {
     "type": "git",
@@ -29,9 +29,10 @@
     ],
     "win": {
       "icon": "build/style/img/wtt.png",
-      "publish": [
-        "github"
-      ],
+      "publish": {
+        "provider": "github",
+        "owner": "ruiewo"
+      },
       "target": {
         "target": "nsis"
       }
