@@ -17,10 +17,6 @@
     "url": "https://github.com/ruiewo/ttw/issues"
   },
   "homepage": "https://github.com/ruiewo/ttw#readme",
-  "devDependencies": {
-    "electron": "^20.0.1",
-    "electron-builder": "^23.3.3"
-  },
   "build": {
     "appId": "tidyup.tackless.work",
     "files": [
@@ -32,6 +28,9 @@
     ],
     "win": {
       "icon": "build/style/img/wtt.png",
+      "publish": [
+        "github"
+      ],
       "target": {
         "target": "nsis"
       }
@@ -40,5 +39,12 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
     }
+  },
+  "devDependencies": {
+    "electron": "^20.0.1",
+    "electron-builder": "^23.3.3"
+  },
+  "dependencies": {
+    "electron-updater": "^5.2.1"
   }
 }
