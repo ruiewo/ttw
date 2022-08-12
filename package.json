@@ -4,7 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "chcp 65001 && electron . --develop --debug-mode"
+    "start": "chcp 65001 && electron . --develop --debug-mode",
+    "build": "electron-builder --win --x64"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,24 @@
   "dependencies": {
     "electron": "^20.0.1",
     "electron-builder": "^23.3.3"
+  },
+  "build": {
+    "appId": "tidyup.tackless.work",
+    "files": [
+      "package.json",
+      "package-lock.json",
+      "main.js",
+      "index.html"
+    ],
+    "win": {
+      "icon": "build/style/img/wtt.png",
+      "target": {
+        "target": "nsis"
+      }
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   }
 }
