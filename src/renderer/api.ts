@@ -132,6 +132,10 @@ export const api = (() => {
         window.api.send('showWorkListWindow');
     }
 
+    async function updateAppVersion() {
+        window.api.send('updateAppVersion');
+    }
+
     return {
         initializeWithWebApp,
         getCategories,
@@ -153,6 +157,7 @@ export const api = (() => {
         punchIn,
         setWindowSize,
         showWorkListWindow,
+        updateAppVersion,
     };
 })();
 
@@ -169,8 +174,15 @@ export const apiEvent = (() => {
         });
     }
 
+    function updateDownloaded(callback: () => void) {
+        window.api.on('updateDownloaded', () => {
+            callback();
+        });
+    }
+
     return {
         workChanged,
         errorOccurred,
+        updateDownloaded,
     };
 })();
