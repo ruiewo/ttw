@@ -403,7 +403,7 @@ function createTaskTrayMenu() {
             },
         },
         {
-            label: 'Data Folder',
+            label: 'フォルダを開く',
             click: () => {
                 shell.openPath(appFolderPath);
             },
