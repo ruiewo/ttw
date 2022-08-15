@@ -1,0 +1,202 @@
+:root {
+    /* subject to change by javascript */
+    --icon-smile: url('./img/fleur-de-lis2.svg');
+    --icon-uncomfortable: url('./img/fleur-de-lis2_yellow.svg');
+    --icon-frustrated: url('./img/fleur-de-lis2_orange.svg');
+    --icon-mad: url('./img/fleur-de-lis2_red.svg');
+    --icon-skull: url('./img/skull.svg');
+
+    /* for reset */
+    --icon-smileDefault: url('./img/fleur-de-lis2.svg');
+    --icon-uncomfortableDefault: url('./img/fleur-de-lis2_yellow.svg');
+    --icon-frustratedDefault: url('./img/fleur-de-lis2_orange.svg');
+    --icon-madDefault: url('./img/fleur-de-lis2_red.svg');
+    --icon-skullDefault: url('./img/skull.svg');
+}
+
+.task {
+    user-select: none;
+}
+
+.workStatus {
+    height: 27px;
+    margin-bottom: 3px;
+    border-bottom: dotted 1px var(--color-UI-main);
+}
+.workStatus:hover {
+    background-color: var(--color-UI-background-active);
+    cursor: pointer;
+}
+.dailyWorkInfo {
+    height: 125px;
+    overflow: scroll;
+}
+.dailyWorkInfo p {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: 24px;
+    width: 100%;
+    overflow: hidden;
+}
+.workSummary {
+    opacity: 0;
+}
+.workSummary.show {
+    opacity: 1;
+    transition: 2s;
+}
+.workingHoursDetail {
+    display: inline-block;
+    width: 100px;
+    height: 24px;
+    text-align: right;
+    vertical-align: middle;
+}
+.workingHoursDetailBar {
+    width: 180px;
+    height: 10px;
+    margin: 7px 0;
+    background: linear-gradient(to left, var(--color-UI-main) 50%, var(--color-UI-background) 50%);
+}
+.workingHoursText {
+    text-align: right;
+    width: 60px;
+}
+
+.calendarContainer {
+    overflow: hidden;
+    transition: 0.5s 0.5s, border 0s 1s;
+}
+
+.calendarContainer.--active {
+    transition: 0.5s 0.5s, border 0s;
+}
+
+.calendarHead,
+.calendarBody {
+    opacity: 0;
+    background-color: var(--color-UI-background-active);
+    margin: 0 1.5px;
+    display: grid;
+    grid-template-columns: repeat(7, 51px);
+    text-align: right;
+    transition: 0.5s 0.3s;
+}
+
+.calendarContainer.--active .calendarHead,
+.calendarContainer.--active .calendarBody {
+    opacity: 1;
+    transition: 0.6s 0.6s;
+}
+.calendarHead div {
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    user-select: none;
+}
+.calendarBody {
+    height: 250px;
+    overflow-y: scroll;
+}
+.calendarBody div {
+    position: relative;
+    width: 51px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    border: solid 1px var(--color-UI-background);
+    user-select: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.calendarBody div:nth-child(7n + 1),
+.calendarBody div:nth-child(7n) {
+    color: rgb(29, 138, 206);
+}
+
+.day {
+    position: relative;
+    color: whitesmoke;
+    color: var(--color-UI-main);
+    background-color: var(--color-UI-background-active);
+}
+
+.day:hover {
+    font-weight: bold;
+    border: solid 3px var(--color-UI-main);
+    cursor: pointer;
+}
+
+.day.--disabled {
+    color: gray;
+    background-color: var(--color-UI-background-disabled);
+}
+
+div.holiday {
+    border: 1px dotted var(--color-UI-main);
+}
+
+.day p {
+    position: absolute;
+    animation: blink 2.5s ease-in-out infinite alternate;
+    background-color: var(--color-UI-background-active);
+}
+.maru {
+    height: 40px;
+    width: 40px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: whitesmoke;
+    border: 2px solid whitesmoke;
+    font-size: 1.2em;
+    line-height: 40px;
+}
+.maru:hover {
+    color: transparent;
+    border: transparent;
+    background-color: transparent;
+}
+
+.icon {
+    height: 48px;
+    width: 49px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.icon:hover {
+    background-image: none;
+    background-color: transparent;
+}
+
+.smile {
+    background-image: var(--icon-smile);
+}
+.uncomfortable {
+    background-image: var(--icon-uncomfortable);
+}
+.frustrated {
+    background-image: var(--icon-frustrated);
+}
+.mad {
+    background-image: var(--icon-mad);
+}
+.skull {
+    background-image: var(--icon-skull);
+}
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    30% {
+        opacity: 0;
+    }
+    70% {
+        opacity: 1;
+    }
+}

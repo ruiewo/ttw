@@ -1,0 +1,40 @@
+.notifyEditorButtons {
+    position: absolute;
+    bottom: 15px;
+    width: calc(100% - 20px);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.notifyEditorButton {
+    display: inline-block;
+    height: 24px;
+    width: 80px;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--color-UI-main);
+    background-color: var(--color-UI-background-active);
+    border-radius: 3px;
+    border: 1px solid var(--color-UI-main);
+    text-align: center;
+    outline: none;
+    transition: all 0.2s;
+}
+.notifyEditorButton:hover {
+    color: var(--color-UI-background);
+    background-color: var(--color-UI-main);
+}
+
+.schedule {
+    margin-top: 4px;
+    color: var(--color-UI-main);
+    background-color: var(--color-UI-background-disabled);
+    overflow: scroll;
+    user-select: none;
+}
+.schedule.notification {
+    cursor: pointer;
+}
+.schedule.notification:hover {
+    background-color: var(--color-UI-background-active);
+}

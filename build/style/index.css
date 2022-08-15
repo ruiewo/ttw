@@ -1,0 +1,342 @@
+:root {
+    --color-UI-main: hsl(190, 100%, 49%, 1);
+    --color-UI-background-active: hsl(200, 96%, 11%, 0.9);
+    --color-UI-background-disabled: hsl(200, 96%, 6%, 0.9);
+    --color-UI-background: hsl(06, 20%, 1%, 0.9);
+}
+
+@font-face {
+    font-family: DJBGetDigital;
+    src: url(../..//style/DigitalNumbers400.ttf);
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.separator {
+    display: inline-block;
+    width: 18px;
+    text-align: center;
+    user-select: none;
+}
+body {
+    position: relative;
+    width: 700px;
+    height: 500px;
+    background-color: rgba(255, 255, 255, 0);
+}
+.dragger {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 0px;
+    bottom: 10px;
+    -webkit-app-region: drag;
+    border-bottom: solid 30px var(--color-UI-main);
+    border-left: solid 30px transparent;
+}
+.button {
+    display: inline-block;
+    height: 30px;
+    width: 100px;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--color-UI-main);
+    background-color: var(--color-UI-background-active);
+    border-radius: 3px;
+    border: 1px solid var(--color-UI-main);
+    margin: 0 20px;
+    text-align: center;
+    outline: none;
+    transition: all 0.2s;
+}
+.button:hover {
+    color: var(--color-UI-background);
+    background-color: var(--color-UI-main);
+}
+.bouncy {
+    animation: bouncy 5s infinite linear;
+    position: relative;
+}
+@keyframes bouncy {
+    0% {
+        top: 0em;
+    }
+    40% {
+        top: 0em;
+    }
+    43% {
+        top: -0.9em;
+    }
+    46% {
+        top: 0em;
+    }
+    48% {
+        top: -0.4em;
+    }
+    50% {
+        top: 0em;
+    }
+    100% {
+        top: 0em;
+    }
+}
+
+/* ボタン類 */
+.uiButton {
+    position: absolute;
+    text-align: center;
+    border-radius: 50%;
+    color: var(--color-UI-main);
+    background-color: var(--color-UI-background);
+    border: inset 2px var(--color-UI-main);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26), 0 2px 10px 0 rgba(0, 0, 0, 0.22);
+    cursor: pointer;
+    user-select: none;
+}
+.uiButton.heads {
+    border-style: inset;
+}
+.uiButton.tails {
+    border-style: outset;
+}
+.uiButton:hover {
+    background-color: var(--color-UI-background-active);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.28), 0 4px 15px 0 rgba(0, 0, 0, 0.25);
+}
+.menuButton {
+    /* background-image: url("./img/android.svg"); */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    transition: 0.4s;
+    right: 10px;
+    bottom: 20px;
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+    font-size: 48px;
+}
+.subButton {
+    opacity: inherit;
+    width: inherit;
+    height: inherit;
+    line-height: inherit;
+    font-size: inherit;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.show {
+    opacity: 1;
+    transform: rotateY(0deg);
+    transition: opacity 100ms 150ms, transform 300ms 150ms;
+    pointer-events: auto;
+}
+.hide {
+    opacity: 0;
+    transform: rotateY(90deg);
+    transition: opacity 50ms 200ms, transform 300ms;
+    pointer-events: none;
+}
+.subButtonWrapper {
+    opacity: 0;
+    width: 0px;
+    height: 0px;
+    line-height: 100px;
+    font-size: 0px;
+    right: 60px;
+    bottom: 60px;
+    position: absolute;
+    white-space: nowrap; /* 日本語文字列をボタンに使用すると格納時にwrapされて下方に伸びてしまうためwrapを制御 */
+}
+.subButtonWrapper:nth-child(2) {
+    transition: all 0.4s 0.3s, background-color 0.1s linear;
+}
+.subButtonWrapper:nth-child(3) {
+    transition: all 0.4s 0.4s, background-color 0.1s linear;
+}
+.subButtonWrapper:nth-child(4) {
+    transition: all 0.4s 0.5s, background-color 0.1s linear;
+}
+.menuButton:hover .subButtonWrapper {
+    opacity: 1;
+    width: 100px;
+    height: 100px;
+    font-size: 36px;
+}
+.menuButton:hover .subButtonWrapper:nth-child(2) {
+    right: 160px;
+    bottom: 0px;
+}
+.menuButton:hover .subButtonWrapper:nth-child(3) {
+    right: 120px;
+    bottom: 120px;
+}
+.menuButton:hover .subButtonWrapper:nth-child(4) {
+    right: 0px;
+    bottom: 160px;
+}
+
+/* WorkInfo画面 */
+.workInfo {
+    width: 300px;
+    height: 0px;
+    padding: 0px;
+    position: absolute;
+    right: -20px; /* padding分をオフセット */
+    top: -330px; /* padding分をオフセット */
+    font-size: 11pt;
+    line-height: normal;
+    text-align: left;
+    color: var(--color-UI-main);
+    background-color: transparent;
+    background: linear-gradient(225deg, transparent 21px, var(--color-UI-background-disabled) 21px);
+    opacity: 0;
+
+    cursor: default;
+    transition: 0.5s 0.5s;
+}
+.menuButton:hover .workInfo {
+    opacity: 1;
+    background: linear-gradient(225deg, transparent 21px, var(--color-UI-background-active) 21px);
+    height: 150px;
+    padding: 20px;
+    right: 0;
+    top: -350px;
+    transition: 0.5s;
+}
+.workInfo::before,
+.workInfo::after {
+    box-sizing: inherit;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 75px 0px 0 150px;
+    pointer-events: none;
+
+    border: 2px solid transparent;
+    width: 0;
+    height: 0;
+    transition: 0.5s 0.5s;
+}
+.menuButton:hover .workInfo::before {
+    width: calc(100% - 30px);
+    height: 30px;
+    left: 15px;
+    margin: 0;
+    border-top-color: var(--color-UI-main);
+    border-right-color: var(--color-UI-main);
+    transform: skewX(45deg);
+    transition: margin 0.5s, transform 0s, width 0.25s ease-out, height 0.25s ease-out 0.25s, left 0.25s ease-out 0.25s;
+}
+.menuButton:hover .workInfo::after {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: transparent;
+    border-bottom-color: var(--color-UI-main);
+    border-left-color: var(--color-UI-main);
+    transition: margin 0.5s, width 0.25s ease-out, height 0.25s ease-out 0.25s;
+}
+.infoContents {
+    opacity: 1;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    transition: 0.6s 0.5s;
+}
+.menuButton:hover .workInfo .infoContents {
+    height: 100%;
+}
+.workInfoHeader {
+    display: inline-block;
+    height: 22px;
+    width: 75px;
+}
+.workInfoInput {
+    display: inline-block;
+    height: 22px;
+    width: 150px;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.workInfo span {
+    vertical-align: middle;
+}
+.workInfoList {
+    /* display: none; */
+    width: 90px;
+    height: 240px;
+    position: absolute;
+    background-color: var(--color-UI-background);
+    color: var(--color-UI-main);
+    border: solid 1px var(--color-UI-main);
+    z-index: 1;
+}
+.workInfoList.hidden {
+    display: none;
+}
+
+.workInfoCategoryList {
+    height: 96px;
+    left: 107px;
+    top: 20px;
+}
+.workInfoWorkProcessListParent {
+    height: 264px;
+    left: 107px;
+    top: 42px;
+    border-right: dotted 1px var(--color-UI-main);
+}
+.workInfoWorkProcessListChild {
+    height: 264px;
+    left: 197px;
+    top: 42px;
+    border-left: none;
+}
+.workInfoBoardList {
+    width: 400px;
+    height: auto;
+    min-height: 72px;
+    max-height: 386px;
+    overflow: scroll;
+    left: -100px;
+    top: 64px;
+}
+.workInfoListItem {
+    height: 24px;
+    padding: 0 7px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor: pointer;
+}
+.workInfoListItem.--active {
+    color: var(--color-UI-background-disabled);
+    background-color: var(--color-UI-main);
+}
+.workInfoListItem:hover {
+    color: var(--color-UI-background-disabled);
+    background-color: var(--color-UI-main);
+}
+
+/* 別画面 */
+.calendarPage {
+    position: relative;
+    width: 380px;
+    color: var(--color-UI-main);
+    background-color: var(--color-UI-background);
+}
+.notificationPage {
+    position: relative;
+    width: 380px;
+    color: var(--color-UI-main);
+    background-color: var(--color-UI-background);
+}
