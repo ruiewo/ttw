@@ -1,8 +1,9 @@
 import { AppConfig, GetSVGsCond, AppBoard, StartOrEnd, WorkConfig, WorkRecord, UserConfig } from '../common/models';
-import { BrowserWindow, app, ipcMain, shell, screen, Menu, Tray } from 'electron';
+import { BrowserWindow, app, ipcMain, shell, screen, Menu, Tray, dialog } from 'electron';
 import * as fs from 'fs';
 import * as path from 'path';
 import pie from 'puppeteer-in-electron';
+import { autoUpdater } from 'electron-updater';
 
 import { isDebugMode, appFolderPath } from './appManager';
 import { AppDb } from './database';
@@ -64,6 +65,26 @@ async function initializeApp() {
     holiday.UpdateHolidaysIfNeeded();
 
     const notInitialized = (await database.getCategories()).length === 0;
+
+    autoUpdater.checkForUpdates();
+    autoUpdater.on('update-downloaded', info => {
+        const dialogOpts = {
+            type: 'info',
+            buttons: ['Restart', 'Later'],
+            message: 'UPDATE',
+            detail: 'A new version has been downloaded. Restart the application to apply the updates.',
+        };
+
+        dialog.showMessageBox(mainWindow!, dialogOpts).then(returnValue => {
+            if (returnValue.response === 0) {
+                autoUpdater.quitAndInstall();
+            }
+        });
+    });
+    autoUpdater.on('error', err => {
+        log.error('There was a problem updating the application!');
+        log.error(err);
+    });
 
     app.whenReady().then(() => {
         createMainWindow(configManager.config.windowSetting, notInitialized);
