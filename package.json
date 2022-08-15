@@ -1,12 +1,13 @@
 {
   "name": "ttw",
-  "version": "0.1.2",
-  "description": "",
-  "main": "main.js",
+  "version": "2.1.0",
+  "description": "Tidy up Tactless Work",
+  "main": "build/js/main/main.js",
   "scripts": {
     "start": "chcp 65001 && electron . --develop --debug-mode",
     "build": "electron-builder --win --x64 --publish never",
-    "publish": "electron-builder --win --x64 --publish always"
+    "publish": "electron-builder --win --x64 --publish always",
+    "watch": "tsc --build --watch"
   },
   "repository": {
     "type": "git",
@@ -23,9 +24,7 @@
     "files": [
       "build",
       "package.json",
-      "package-lock.json",
-      "main.js",
-      "index.html"
+      "package-lock.json"
     ],
     "win": {
       "icon": "build/style/img/ttw.png",
@@ -43,10 +42,29 @@
     }
   },
   "devDependencies": {
-    "electron": "^20.0.1",
-    "electron-builder": "^23.3.3"
+    "@types/log4js": "^2.3.5",
+    "@types/sqlite3": "^3.1.8",
+    "@typescript-eslint/eslint-plugin": "^5.33.0",
+    "@typescript-eslint/parser": "^5.33.0",
+    "electron": "^20.0.2",
+    "electron-builder": "^23.3.3",
+    "eslint": "^8.21.0",
+    "eslint-config-prettier": "^8.5.0",
+    "prettier": "^2.7.1",
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.7.4",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
   },
   "dependencies": {
-    "electron-updater": "^5.2.1"
+    "electron-updater": "^5.2.1",
+    "csv": "^6.2.0",
+    "iconv-lite": "^0.6.3",
+    "log4js": "^6.6.1",
+    "node-fetch": "^2.6.7",
+    "node-ical": "^0.15.1",
+    "puppeteer-core": "^15.5.0",
+    "puppeteer-in-electron": "^3.0.5",
+    "sqlite3": "^5.0.11"
   }
 }
