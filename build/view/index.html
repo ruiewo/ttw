@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+    <title>Tidy up tackless Work</title>
+    <link rel="stylesheet" href="../style/reset.css" />
+    <link rel="stylesheet" href="../style/pageCommon.css" />
+    <link rel="stylesheet" href="../style/markdown.css" />
+    <link rel="stylesheet" href="../style/notification.css" />
+    <link rel="stylesheet" href="../style/calendar.css" />
+    <link rel="stylesheet" href="../style/config.css" />
+    <link rel="stylesheet" href="../style/boardEditor.css" />
+    <link rel="stylesheet" href="../style/twDialog.css" />
+    <link rel="stylesheet" href="../style/index.css" />
+    <script src="../js/renderer/index.js" type="module"></script>
+</head>
+
+<body id="body">
+    <div id="container">
+        <div class="dragger" id="dragger"></div>
+        <div class="menuButton uiButton" id="menuButton" data-area="menuButton">
+            <span></span>
+            <div class="subButtonWrapper" data-area="subButton">
+                <div class="subButton uiButton heads show" id="punchInButton" title="右クリックでJmotto利用の切り替え">出勤</div>
+                <div class="subButton uiButton tails hide" id="startOrEndWorkButton" title="右クリックでJmotto利用の切り替え">Start</div>
+            </div>
+            <div class="subButtonWrapper" data-area="subButton">
+                <div class="subButton uiButton heads show" id="calendarButton" data-page="calendar">Cal</div>
+                <div class="subButton uiButton tails hide" id="notificationButton" data-page="notification">Info</div>
+            </div>
+            <div class="subButtonWrapper" data-area="subButton">
+                <div class="subButton uiButton heads show" id="workListButton">実績</div>
+                <div class="subButton uiButton tails hide" id="markdownButton" data-page="markdown">MD</div>
+            </div>
+            <div class="workInfo" id="workInfo" data-area="workInfo">
+                <ul class="infoContents">
+                    <li><span class="workInfoHeader">分類</span><span class="separator">:</span><span class="workInfoInput" id="currentCategory" data-target="category">開発作業</span></li>
+                    <li><span class="workInfoHeader">詳細</span><span class="separator">:</span><span class="workInfoInput" id="currentWorkProcess" data-target="workProcess">単体試験-レビュー</span></li>
+                    <li><span class="workInfoHeader">業務名</span><span class="separator">:</span><span class="workInfoInput" id="currentProject" data-target="project">project</span></li>
+                    <li><span class="workInfoHeader">Board</span><span class="separator">:</span><span class="workInfoInput" id="currentBoard" data-target="board">board</span></li>
+                    <li><span class="workInfoHeader">Comment</span><span class="separator">:</span><span class="workInfoInput" id="currentComment" data-target="comment">Comment</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="calendarPage" id="calendarPage"></div>
+        <div class="notificationPage" id="notificationPage"></div>
+        <div class="markdownPage" id="markdownPage"></div>
+        <dialog class="boardEditorDialog" id="boardEditorDialog"></dialog>
+    </div>
+</body>
+</html>
