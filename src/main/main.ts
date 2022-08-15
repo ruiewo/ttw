@@ -1,5 +1,5 @@
 import { AppConfig, GetSVGsCond, AppBoard, StartOrEnd, WorkConfig, WorkRecord, UserConfig } from '../common/models';
-import { BrowserWindow, app, ipcMain, shell, screen, Menu, Tray, dialog } from 'electron';
+import { BrowserWindow, app, ipcMain, shell, screen, Menu, Tray } from 'electron';
 import * as fs from 'fs';
 import * as path from 'path';
 import pie from 'puppeteer-in-electron';
@@ -68,18 +68,7 @@ async function initializeApp() {
 
     autoUpdater.checkForUpdates();
     autoUpdater.on('update-downloaded', info => {
-        const dialogOpts = {
-            type: 'info',
-            buttons: ['Restart', 'Later'],
-            message: 'UPDATE',
-            detail: 'A new version has been downloaded. Restart the application to apply the updates.',
-        };
-
-        dialog.showMessageBox(mainWindow!, dialogOpts).then(returnValue => {
-            if (returnValue.response === 0) {
-                autoUpdater.quitAndInstall();
-            }
-        });
+        mainWindow!.webContents.send('updateDownloaded');
     });
     autoUpdater.on('error', err => {
         log.error('There was a problem updating the application!');
@@ -344,6 +333,10 @@ function activateCallback() {
         const zoom = Number(configManager.config.windowSetting.zoomSlider || 100) / 100;
         mainWindow!.setPosition(Math.trunc(x - mouseX * zoom), Math.trunc(y - mouseY * zoom));
     });
+
+    ipcMain.on('updateAppVersion', () => {
+        autoUpdater.quitAndInstall();
+    });
 }
 
 function setMainWindowSize(zoomPercent: number) {
@@ -519,7 +512,7 @@ async function createWorkListWindow() {
         workListWindow = null;
     });
 
-    // todo! hanndle error when server cannot connect.
+    // todo! handle error when server cannot connect.
     // UnhandledPromiseRejectionWarning: Error: ERR_CONNECTION_REFUSED (-102) loading 'https://127.0.0.1:7031/login'
     await workListWindow.loadURL(appSettingsManager.loginUrl);
 
