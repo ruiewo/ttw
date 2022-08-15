@@ -1,0 +1,67 @@
+.dropArea {
+    cursor: grabbing;
+}
+.dropArea::before {
+    content: '';
+    position: absolute;
+    box-sizing: border-box;
+    left: 0;
+    top: 0;
+    width: 360px;
+    height: 270px;
+    margin: 8px;
+    border: 2px dashed var(--color-UI-main);
+    opacity: 0;
+}
+
+.dropArea.droppable::before {
+    background: repeating-linear-gradient(
+        -45deg,
+        var(--color-UI-main),
+        var(--color-UI-main) 5px,
+        var(--color-UI-background) 5px,
+        var(--color-UI-background) 10px
+    );
+    opacity: 0.4;
+}
+
+.dropArea::after {
+    content: 'Drop md file HERE!';
+    position: absolute;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 360px;
+    height: 150px;
+    width: 360px;
+    text-align: center;
+    color: var(--color-UI-main);
+    font-weight: bold;
+    font-size: 36pt;
+    white-space: pre-wrap;
+    text-shadow: 0 0 5px var(--color-UI-background);
+    opacity: 1;
+}
+
+.pageTopArea .bottomMessage {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.bottomMessage a {
+    float: right;
+    padding-right: 15px;
+    font-size: 20pt;
+    text-align: center;
+    text-decoration: none;
+    color: var(--color-UI-main);
+    opacity: 0.5;
+}
+.bottomMessage a:hover {
+    opacity: 1;
+}

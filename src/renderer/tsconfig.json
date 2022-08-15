@@ -1,0 +1,16 @@
+{
+    "extends": "../tsconfig.common.json",
+    "compilerOptions": {
+        // "rootDir": ".",
+        "outDir": "../../build/js",
+        "composite": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "sourceMap": false,
+    },
+    "include": [
+        "../@types",
+        "../common",
+        "../renderer",
+    ]
+}

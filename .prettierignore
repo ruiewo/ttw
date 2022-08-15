@@ -1,0 +1,9 @@
+node_modules/
+build/js/
+dist/
+temp/
+.vs/
+
+*.html
+package.json
+package-lock.json

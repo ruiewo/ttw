@@ -1,0 +1,96 @@
+.pageTopArea {
+    opacity: 0;
+    position: absolute;
+    top: 10px;
+    width: 380px;
+    height: 0;
+    padding: 0px 10px;
+    color: var(--color-UI-main);
+    background-color: var(--color-UI-background);
+    overflow: hidden;
+    box-shadow: 0 0 0 1px var(--color-UI-main) inset, 0 0 0 2px var(--color-UI-background) inset, 0 0 0 3px var(--color-UI-main) inset;
+    transition: 0.5s 0.5s;
+
+    background-image: url('./img/eagle2_bg.svg');
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: contain;
+}
+.pageTopArea.--active {
+    padding: 7px 10px;
+    opacity: 1;
+    width: 380px;
+    height: 166px;
+}
+
+.pageTopHeader {
+    display: inline-block;
+    width: 75px;
+    font-size: 11pt;
+    user-select: none;
+}
+.pageTopTextBox {
+    display: inline-block;
+    width: 225px;
+    height: 18px;
+    color: var(--color-UI-main);
+    background-color: var(--color-UI-background-active);
+    outline: none;
+}
+
+/* test*/
+.pageTopSwitchButton {
+    display: inline-block;
+    margin: 0 1rem;
+}
+.pageTopSwitchButton input {
+    display: none;
+}
+.pageTopSwitchButton label {
+    display: flex;
+    flex-direction: row;
+    width: 36px;
+    height: 18px;
+    padding: 2px;
+    vertical-align: middle;
+    background-color: var(--color-UI-background);
+    border-radius: 18px;
+    border: solid 1px var(--color-UI-main);
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.pageTopSwitchButton label span {
+    display: block;
+    height: 12px;
+    width: 12px;
+    background-color: var(--color-UI-main);
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+.pageTopSwitchButton input:checked + label {
+    flex-direction: row-reverse;
+}
+
+.pageMainArea {
+    position: absolute;
+    top: 190px;
+    width: 380px;
+    height: 0;
+    border: solid 0px var(--color-UI-main);
+    padding: 0px 8px;
+    background-color: var(--color-UI-background);
+    overflow: scroll;
+    user-select: none;
+    transition: 0.5s 0.5s;
+    opacity: 0;
+}
+
+.pageMainArea.--active {
+    height: 290px;
+    border: solid 2px var(--color-UI-main);
+    padding: 8px;
+    opacity: 1;
+    transition: 0.5s 0.5s;
+}
