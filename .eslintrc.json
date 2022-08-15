@@ -1,0 +1,58 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "eslint:recommended",
+        // "airbnb-base",
+        "prettier"
+    ],
+    "parser": "",
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+    ],
+    "rules": {
+        "prefer-const": "warn",
+        // "constructor-super": "warn",
+        // "curly": "warn",
+        // "eqeqeq": "warn",
+        // "no-buffer-constructor": "warn",
+        // "no-caller": "warn",
+        // "no-debugger": "warn",
+        // "no-duplicate-case": "warn",
+        // "no-duplicate-imports": "warn",
+        // "no-eval": "warn",
+        "no-extra-semi": "warn",
+        // "no-new-wrappers": "warn",
+        // "no-redeclare": "off",
+        // "no-sparse-arrays": "warn",
+        "no-throw-literal": "warn",
+        // "no-unsafe-finally": "warn",
+        // "no-unused-labels": "warn",
+        // "no-restricted-globals": [
+        //     "warn",
+        //     "name",
+        //     "length",
+        //     "event",
+        //     "closed",
+        //     "external",
+        //     "status",
+        //     "origin",
+        //     "orientation",
+        //     "context"
+        // ], // non-complete list of globals that are easy to access unintentionally
+        "no-var": "warn",
+        "semi": "warn",
+        "no-unused-expressions": "error", // 意味のない式
+        "no-fallthrough": "warn",
+        "wrap-iife": [
+            "error",
+            "inside" // inside , outside, any
+        ] // 即時実行関数の()の強制 (function(){})(), (function(){}()),
+    }
+}

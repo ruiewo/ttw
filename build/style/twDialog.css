@@ -1,0 +1,73 @@
+:root {
+    /* --color-UI-color: #333;
+    --color-UI-background: white;
+    --color-UI-show: hsl(196, 80%, 50%, 1);
+    --color-UI-warn: hsl(56, 80%, 50%, 1);
+    --color-UI-error: hsl(6, 80%, 50%, 1); */
+}
+
+.twDialog {
+    margin: auto;
+    height: auto;
+    max-height: 450px;
+    /* min-height: 200px; */
+    min-width: 340px;
+    color: var(--color-UI-main);
+    background-color: var(--color-UI-background);
+    text-align: left;
+    border-radius: 15px;
+    /* border-color: var(--color-UI-show); */
+    padding: 0;
+    overflow: hidden;
+    user-select: none;
+}
+
+.twDialog.warn {
+    border-width: 5px;
+    /* border-color: var(--color-UI-warn); */
+    background-color: var(--color-UI-background-disabled);
+}
+
+.twDialog.error {
+    border-width: 8px;
+    /* border-color: var(--color-UI-error); */
+    background-color: var(--color-UI-background-active);
+}
+
+.twDialog form {
+    padding: 8px 16px 16px 16px;
+    background-color: transparent;
+    height: 100%;
+    overflow: auto;
+    scroll-margin: 50px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.twDialog h1 {
+    height: 30px;
+    font-size: 1.5rem;
+    margin: 5px 0;
+    display: none;
+}
+
+.twDialog p {
+    flex-grow: 1;
+    white-space: pre-wrap;
+}
+
+.twDialog .twDialogButtons {
+    margin-top: 20px;
+    height: 30px;
+}
+
+.twDialog::backdrop {
+    background-color: rgba(15, 10, 25, 0.4);
+}
+
+.twDialog progress.hidden {
+    display: none;
+}

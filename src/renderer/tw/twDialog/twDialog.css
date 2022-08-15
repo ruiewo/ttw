@@ -1,0 +1,79 @@
+@charset "UTF-8";
+/* ここから */
+:root {
+  --color-UI-color: var(--foreground-color);
+  --color-UI-background: var(--active-background-color);
+  --color-UI-show: var(--background-color);
+  --color-UI-warn: hsl(56, 80%, 35%, 1);
+  --color-UI-error: hsl(6, 80%, 35%, 1);
+}
+
+.twDialog {
+  width: 40rem;
+  text-align: left;
+  border: solid 5px var(--color-UI-show);
+  margin: auto;
+  overflow: hidden;
+  box-shadow: 0px 0px 1rem #fff8;
+}
+.twDialog.warn {
+  border-width: 5px;
+  border-color: var(--color-UI-warn);
+}
+.twDialog.error {
+  border-width: 5px;
+  border-color: var(--color-UI-error);
+}
+.twDialog form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  background-color: #00000055;
+  background-color: var(--color-UI-background);
+}
+.twDialog .appIcon {
+  height: 5rem;
+  background-image: url("/images/app.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 2rem 0 1rem;
+}
+.twDialog h1 {
+  height: 3rem;
+  padding: 0 1rem;
+  color: var(--color-UI-color);
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  white-space: pre-line;
+}
+.twDialog p {
+  flex-grow: 1;
+  white-space: pre-line;
+  overflow-y: auto;
+  padding: 2rem;
+  font-size: 1.5rem;
+  color: var(--color-UI-color);
+  text-shadow: 0 0 1rem #000;
+}
+.twDialog .twDialogButtons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 8rem);
+  justify-content: center;
+  grid-gap: 1rem;
+  padding: 1rem 0;
+}
+.twDialog .twDialogButtons button {
+  min-width: 8rem;
+}
+.twDialog::-webkit-backdrop {
+  background-color: rgba(15, 10, 25, 0.4);
+}
+.twDialog::backdrop {
+  background-color: rgba(15, 10, 25, 0.4);
+}
+.twDialog progress.hidden {
+  display: none;
+}
