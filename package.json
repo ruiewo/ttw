@@ -26,6 +26,15 @@
       "package.json",
       "package-lock.json"
     ],
+    "extraFiles": [
+      {
+        "from": "build/resources",
+        "to": "resources/app",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
     "win": {
       "icon": "build/style/img/ttw.png",
       "publish": {
@@ -57,8 +66,9 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
-    "electron-updater": "^5.2.1",
     "csv": "^6.2.0",
+    "electron-updater": "^5.2.1",
+    "fs-extra": "^10.1.0",
     "iconv-lite": "^0.6.3",
     "log4js": "^6.6.1",
     "node-fetch": "^2.6.7",
