@@ -8,9 +8,9 @@
 
 .twDialog {
     margin: auto;
-    height: auto;
+    /* height: auto; */
     max-height: 450px;
-    /* min-height: 200px; */
+    min-height: 200px;
     min-width: 340px;
     color: var(--color-UI-main);
     background-color: var(--color-UI-background);
@@ -38,6 +38,7 @@
     padding: 8px 16px 16px 16px;
     background-color: transparent;
     height: 100%;
+    min-height: inherit;
     overflow: auto;
     scroll-margin: 50px;
 
@@ -51,7 +52,7 @@
     height: 30px;
     font-size: 1.5rem;
     margin: 5px 0;
-    display: none;
+    /* display: none; */
 }
 
 .twDialog p {
