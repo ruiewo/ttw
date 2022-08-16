@@ -66,7 +66,6 @@ async function initializeApp() {
 
     const notInitialized = (await database.getCategories()).length === 0;
 
-    // autoUpdater.checkForUpdatesAndNotify();
     autoUpdater.checkForUpdates();
     autoUpdater.on('update-downloaded', info => {
         mainWindow!.webContents.send('updateDownloaded');
@@ -336,10 +335,7 @@ function activateCallback() {
     });
 
     ipcMain.on('updateAppVersion', () => {
-        app.relaunch();
-        autoUpdater.autoInstallOnAppQuit = true;
-        app.quit();
-        // autoUpdater.quitAndInstall(true);
+        autoUpdater.quitAndInstall(true, true);
     });
 }
 
