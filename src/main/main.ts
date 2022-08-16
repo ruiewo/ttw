@@ -66,10 +66,11 @@ async function initializeApp() {
 
     const notInitialized = (await database.getCategories()).length === 0;
 
-    autoUpdater.checkForUpdates();
-    autoUpdater.on('update-downloaded', info => {
-        mainWindow!.webContents.send('updateDownloaded');
-    });
+    autoUpdater.checkForUpdatesAndNotify();
+    // autoUpdater.checkForUpdates();
+    // autoUpdater.on('update-downloaded', info => {
+    //     mainWindow!.webContents.send('updateDownloaded');
+    // });
     autoUpdater.on('error', err => {
         log.error('There was a problem updating the application!');
         log.error(err);
