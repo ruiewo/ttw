@@ -108,4 +108,6 @@ electron-builder.env
 
 # ttw temporary files.
 build/js/
+build/resources/
+build/_resources/
 AppData/

@@ -1,6 +1,7 @@
 import { AppConfig, GetSVGsCond, AppBoard, StartOrEnd, WorkConfig, WorkRecord, UserConfig } from '../common/models';
 import { BrowserWindow, app, ipcMain, shell, screen, Menu, Tray } from 'electron';
 import * as fs from 'fs';
+import * as fse from 'fs-extra';
 import * as path from 'path';
 import pie from 'puppeteer-in-electron';
 import { autoUpdater } from 'electron-updater';
@@ -64,7 +65,20 @@ async function initializeApp() {
     holiday.initialize(database);
     holiday.UpdateHolidaysIfNeeded();
 
+    log.info(process.resourcesPath);
+    log.info(appFolderPath);
+
     const notInitialized = (await database.getCategories()).length === 0;
+    if (notInitialized) {
+        try {
+            // copy pandoc/template.html, appSettings.json .etc to user directory.
+            fse.copySync(path.join(process.resourcesPath, 'app'), appFolderPath, {
+                overwrite: false,
+            });
+        } catch (error) {
+            log.error(error);
+        }
+    }
 
     autoUpdater.checkForUpdates();
     autoUpdater.on('update-downloaded', info => {

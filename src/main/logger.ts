@@ -9,7 +9,7 @@ configure({
     },
     categories: {
         debug: { appenders: ['file', 'console'], level: 'debug' },
-        default: { appenders: ['file'], level: 'warn' },
+        default: { appenders: ['file'], level: 'info' },
     },
 });
 
