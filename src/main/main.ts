@@ -335,7 +335,7 @@ function activateCallback() {
     });
 
     ipcMain.on('updateAppVersion', () => {
-        autoUpdater.quitAndInstall();
+        autoUpdater.quitAndInstall(true);
     });
 }
 
