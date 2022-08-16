@@ -216,7 +216,7 @@ async function initialize() {
         twDialog.warn(
             {
                 header: 'Update',
-                message: 'A new version has been downloaded. Restart the application to apply the updates.',
+                message: 'A new version has been downloaded.\nRestart the application to apply the updates.',
             },
             [{ label: 'Later' }, { label: 'Restart', onclick: () => api.updateAppVersion() }]
         );
