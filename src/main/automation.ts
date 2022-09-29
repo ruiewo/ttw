@@ -187,7 +187,7 @@ async function punchInFreee(startOrEnd: StartOrEnd) {
         log.debug('[freee] page loaded');
 
         await Promise.all([
-            page.waitForSelector('#user_email', { timeout: 10000 }),
+            page.waitForSelector('#login_id', { timeout: 10000 }),
             page.waitForSelector('input[name="password"]', { timeout: 10000 }),
         ]).catch(error => {
             log.error('[freee] go to login page failed.');
@@ -195,7 +195,7 @@ async function punchInFreee(startOrEnd: StartOrEnd) {
         });
 
         const { email, password } = configManager.config.freee;
-        await page.type('#user_email', email);
+        await page.type('#login_id', email);
         await page.type('input[name="password"]', password);
 
         const punchButtonSelector = `.vb-loading button.vb-button--appearancePrimary`;
@@ -220,7 +220,7 @@ async function punchInFreee(startOrEnd: StartOrEnd) {
 
             if (textContent === targetText) {
                 await sleep(500); // element.click() は座標判定して該当座標にclickイベントを飛ばしているため、アニメーション等で対象が移動する場合は意図しない座標をクリックする可能性がある。
-                await button.click();
+                // await button.click();
                 buttonClicked = true;
                 break;
             }
