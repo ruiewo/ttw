@@ -5,7 +5,6 @@ import { sleep } from './tw/twUtility/twUtility.js';
 declare let window: ElectronWindow;
 
 class MarkdownPage {
-    private initialized = false;
     private mdFileDropArea: HTMLElement;
     private mdConvertSettingArea: HTMLElement;
 
@@ -57,7 +56,6 @@ class MarkdownPage {
 
         markdownPage.appendChild(this.mdFileDropArea);
         this.activateCallback();
-        this.initialized = true;
     }
 
     activateCallback() {
