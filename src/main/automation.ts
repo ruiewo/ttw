@@ -220,7 +220,7 @@ async function punchInFreee(startOrEnd: StartOrEnd) {
 
             if (textContent === targetText) {
                 await sleep(500); // element.click() は座標判定して該当座標にclickイベントを飛ばしているため、アニメーション等で対象が移動する場合は意図しない座標をクリックする可能性がある。
-                // await button.click();
+                await button.click();
                 buttonClicked = true;
                 break;
             }
