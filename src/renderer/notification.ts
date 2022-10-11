@@ -295,7 +295,7 @@ export const notificationManager = (() => {
                 }
             }, timeDelay);
 
-            notificationTimers.push({ notificationId: notification.id!, timerId: timer });
+            notificationTimers.push({ notificationId: notification.id, timerId: timer });
         }
     }
 

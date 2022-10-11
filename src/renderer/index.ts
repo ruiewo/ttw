@@ -7,7 +7,7 @@ import { log } from './logger.js';
 import { appEvent } from './event.js';
 import { configManager } from './configManager.js';
 import { PageManager } from './page.js';
-import { UserConfig } from '../common/models.js';
+import { AppNotification, UserConfig } from '../common/models.js';
 import { TwConfigDialog, TwConfigGroupData } from './tw/twConfigDialog/twConfigDialog.js';
 import { WorkInfoPanel } from './workInfoPanel.js';
 import { api, apiEvent } from './api.js';
@@ -109,6 +109,21 @@ async function initialize() {
         }
 
         notificationManager.addNotifications(config.notifications);
+        api.getJmottoEvents()
+            .then(jmottoEvents => {
+                const notifications: AppNotification[] = jmottoEvents.map(x => ({
+                    id: -1,
+                    time: x.time,
+                    title: x.title,
+                    message: `jMottoの予定です`,
+                    link: '',
+                }));
+                notificationManager.addNotifications(notifications);
+            })
+            .catch(error => {
+                log.error('failed to get Jmotto events.');
+                log.error(error);
+            });
 
         setMainColor(config.color.useDefaultMainColor, config.color.mainHueSlider);
 
