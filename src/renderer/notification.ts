@@ -211,9 +211,11 @@ class NotificationPage {
 
         const jmottoEvents = await api.getJmottoEvents();
 
-        const notifications: Schedule[] = notificationManager.notifications.map(({ time, title, id }) => {
-            return { type: 'notify', time, title, id };
-        });
+        const notifications: Schedule[] = notificationManager.notifications
+            .filter(x => x.id != -1) // todo refactor this. need to remove jmotto notify events.
+            .map(({ time, title, id }) => {
+                return { type: 'notify', time, title, id };
+            });
 
         const allSchedules = [...workActs, ...jmottoEvents, ...notifications];
 
