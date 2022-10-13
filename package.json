@@ -1,6 +1,6 @@
 {
   "name": "ttw",
-  "version": "2.1.12",
+  "version": "2.2.0",
   "description": "Tidy up Tactless Work",
   "main": "build/js/main/main.js",
   "scripts": {
