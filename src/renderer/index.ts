@@ -13,6 +13,7 @@ import { WorkInfoPanel } from './workInfoPanel.js';
 import { api, apiEvent } from './api.js';
 import { enableWindowDrag } from './mouseEventManager.js';
 import { isNullOrWhiteSpace, triggerEvent, DateEx } from './tw/twUtility/twUtility.js';
+import { clock } from './clock.js';
 
 const menuButton = document.getElementById('menuButton')!;
 const punchInButton = document.getElementById('punchInButton')!;
@@ -135,6 +136,10 @@ async function initialize() {
             // triggerEvent('contextmenu', menuButton);
             // todo click user info group
             // document.getElementById('configUserInfo')!.click();
+        }
+
+        if (config.appMode.useClockMode) {
+            clock.start();
         }
     });
 
@@ -395,6 +400,9 @@ function createConfigDialog() {
 
     configDialog.createGroup('workInfoPanel', 'WorkInfoPanel');
     configDialog.appendNumberInput('workInfoPanel', 'maxBoardListCount', 'List Count', 10);
+
+    configDialog.createGroup('appMode', 'Application Mode');
+    configDialog.appendCheckbox('appMode', 'useClockMode', 'use clock mode');
 
     configDialog.appendButton('', 'saveButton', 'save', 'bouncy');
 

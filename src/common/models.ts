@@ -64,6 +64,9 @@ export namespace UserConfig {
     export type WorkInfoPanel = {
         maxBoardListCount: number;
     };
+    export type AppMode = {
+        useClockMode: boolean;
+    };
 }
 
 export type UserConfig = {
@@ -74,6 +77,7 @@ export type UserConfig = {
     windowSetting: UserConfig.WindowSetting;
     color: UserConfig.Color;
     workInfoPanel: UserConfig.WorkInfoPanel;
+    appMode: UserConfig.AppMode;
 };
 
 export type WorkConfig = WorkRecord & {

@@ -85,6 +85,9 @@ const defaultConfig: AppConfig = {
     workInfoPanel: {
         maxBoardListCount: 10,
     },
+    appMode: {
+        useClockMode: false,
+    },
 };
 
 const configFileName = 'config.json';
@@ -127,6 +130,7 @@ export class ConfigManager {
         color,
         calendar,
         workInfoPanel,
+        appMode,
     }: {
         jmotto: UserConfig.Jmotto;
         freee: UserConfig.Freee;
@@ -135,6 +139,7 @@ export class ConfigManager {
         color: UserConfig.Color;
         calendar: UserConfig.Calendar;
         workInfoPanel: UserConfig.WorkInfoPanel;
+        appMode: UserConfig.AppMode;
     }) {
         this.config.jmotto = jmotto;
         this.config.freee = freee;
@@ -143,6 +148,8 @@ export class ConfigManager {
         this.config.color = color;
         this.config.calendar = calendar;
         this.config.workInfoPanel = workInfoPanel;
+        this.config.appMode = appMode;
+
         return saveConfig(this.config, this.configFilePath);
     }
 
@@ -232,6 +239,11 @@ function loadConfig(configFilePath: string) {
             const text = fs.readFileSync(configFilePath, 'utf-8');
             const config = JSON.parse(text) as AppConfig;
 
+            // todo remove next version.
+            if (config.appMode == null) {
+                config.appMode = { useClockMode: false };
+            }
+
             return config;
         } else {
             throw new Error('config file does not exist.');
@@ -246,7 +258,7 @@ function loadConfig(configFilePath: string) {
 function saveConfig(config: AppConfig, configFilePath: string) {
     try {
         fs.writeFileSync(configFilePath, JSON.stringify(config, null, 4), 'utf8');
-        log.debug('config saved.');
+        log.debug(`config saved. path = [ ${configFilePath} ]`);
     } catch (error) {
         log.error('saveConfig failed.');
         log.error(error);

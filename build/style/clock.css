@@ -1,0 +1,49 @@
+.clock {
+    position: absolute;
+    border-radius: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    pointer-events: none;
+    width: 116px;
+    height: 116px;
+}
+
+.wrap {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+.minute,
+.hour {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    transform-origin: center center;
+    transform: rotate(0deg);
+    background: linear-gradient(to bottom, var(--color-UI-main) 50%, transparent 50%);
+}
+.hour {
+    height: 60px;
+    width: 5px;
+}
+.minute {
+    height: 90px;
+    width: 3px;
+}
+
+.dot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 100px;
+    background: var(--color-UI-main);
+    border: 2px solid var(--color-UI-background);
+    border-radius: 100px;
+    margin: auto;
+}
