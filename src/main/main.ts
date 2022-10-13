@@ -90,6 +90,9 @@ async function initializeApp() {
     });
 
     app.whenReady().then(() => {
+        if (process.platform === 'win32') {
+            app.setAppUserModelId('tidyup.tackless.work');
+        }
         createMainWindow(configManager.config.windowSetting, notInitialized);
         createTaskTrayMenu();
     });
