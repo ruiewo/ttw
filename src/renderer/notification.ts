@@ -274,7 +274,7 @@ export const notificationManager = (() => {
     function add(_notifications: AppNotification[]) {
         notifications.push(..._notifications);
 
-        for (const notification of notifications) {
+        for (const notification of _notifications) {
             const target = new Date();
             target.setHours(Number.parseInt(notification.time.split(':')[0]));
             target.setMinutes(Number.parseInt(notification.time.split(':')[1]));
