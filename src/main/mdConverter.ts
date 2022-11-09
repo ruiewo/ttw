@@ -87,6 +87,7 @@ function createOption({ filePath, docType, template, isEmbed }: MdConvertInfo) {
             option.templateFilePath = templateFilePath;
             option.useTableOfContent = true;
             option.outputFilePath = null;
+            option.selfContained = isEmbed;
             option.slideshow = false;
             break;
         }
@@ -136,7 +137,12 @@ function createCommand(option: Option) {
 
 async function execute(command: string) {
     try {
-        const { stdout, stderr } = await execAsync(command);
+        // todo stdoutにhtml出力せず、ファイル出力してPDF変換を！
+        // pdf 出力時にmaxBuffer越えるため一時処理で10MBまで増やす。
+        const { stdout, stderr } = await execAsync(command, {
+            maxBuffer: 10 * 1024 * 1024,
+        });
+
         log.debug('stdout:', stdout);
         log.debug('stderr:', stderr);
 
