@@ -1,3 +1,4 @@
+import os from 'os';
 import { promises as fs } from 'fs';
 import * as path from 'path';
 import * as util from 'util';
@@ -5,6 +6,7 @@ import { exec } from 'child_process';
 import { BrowserWindow } from 'electron';
 import { log } from './logger';
 import { appFolderPath } from './appManager';
+import { isNullOrWhiteSpace } from './tw/twUtility/twUtility';
 
 const execAsync = util.promisify(exec);
 
@@ -22,20 +24,48 @@ export type MdConvertInfo = {
     docType: string;
     template: string;
     isEmbed: boolean;
+    tempDir?: string;
 };
 
 async function convert({ filePath, docType, template, isEmbed }: MdConvertInfo) {
-    const option = createOption({ filePath, docType, template, isEmbed });
-    const command = createCommand(option);
-
-    const result = await execute(command);
-    if (docType !== 'pdf') {
-        return result.success;
+    if (docType === 'pdf') {
+        // convert to pdf with chrome, not with pandoc.
+        // because pandoc's pdf convert requires latex module.
+        return convertToPdf({ filePath, docType, template, isEmbed });
     }
 
-    // convert to pdf by chrome, not with pandoc.
-    // because pandoc's pdf convert requires latex module.
-    return convertToPdf(filePath, result.response!);
+    const option = await createOption({ filePath, docType, template, isEmbed });
+    const command = createCommand(option);
+    const result = await execute(command);
+
+    return result.success;
+}
+
+async function convertToPdf({ filePath, docType, template, isEmbed }: MdConvertInfo) {
+    let tempDir = '';
+    try {
+        tempDir = await createTempDirectory();
+
+        // create html file.
+        const option = await createOption({ filePath, docType, template, isEmbed, tempDir });
+        const command = createCommand(option);
+        const result = await execute(command);
+
+        if (!result.success) {
+            return false;
+        }
+
+        // create pdf file.
+        const succeed = convertHtmlToPdf(option.inputFilePath, option.outputFilePath!);
+        return succeed;
+    } catch (error) {
+        log.error(`convertToPdf failed.`);
+        return false;
+    } finally {
+        if (!isNullOrWhiteSpace(tempDir)) {
+            deleteTempDirectory(tempDir);
+        }
+    }
 }
 
 type Option = {
@@ -50,7 +80,7 @@ type Option = {
     convertRelativePath: boolean;
 };
 
-function createOption({ filePath, docType, template, isEmbed }: MdConvertInfo) {
+async function createOption({ filePath, docType, template, isEmbed, tempDir }: MdConvertInfo) {
     const option: Option = {
         command: 'pandoc',
         templateFilePath: null,
@@ -86,7 +116,7 @@ function createOption({ filePath, docType, template, isEmbed }: MdConvertInfo) {
 
             option.templateFilePath = templateFilePath;
             option.useTableOfContent = true;
-            option.outputFilePath = null;
+            option.outputFilePath = path.join(tempDir!, `${new Date().toISOString().replace(/[TZ.:-]/g, '')}.html`);
             option.selfContained = isEmbed;
             option.slideshow = false;
             break;
@@ -137,11 +167,7 @@ function createCommand(option: Option) {
 
 async function execute(command: string) {
     try {
-        // todo stdoutにhtml出力せず、ファイル出力してPDF変換を！
-        // pdf 出力時にmaxBuffer越えるため一時処理で10MBまで増やす。
-        const { stdout, stderr } = await execAsync(command, {
-            maxBuffer: 10 * 1024 * 1024,
-        });
+        const { stdout, stderr } = await execAsync(command);
 
         log.debug('stdout:', stdout);
         log.debug('stderr:', stderr);
@@ -153,27 +179,51 @@ async function execute(command: string) {
     }
 }
 
-async function convertToPdf(inputFilePath: string, html: string) {
+async function convertHtmlToPdf(inputFilePath: string, tempHtmlFilePath: string) {
     const pdfPath = inputFilePath.replace('.md', `.pdf`);
     let succeed = false;
     const window = new BrowserWindow({ show: false });
 
     try {
-        const file = 'data:text/html;charset=UTF-8,' + encodeURIComponent(html);
-        await window.loadURL(file);
+        await window.loadURL(tempHtmlFilePath);
 
         const data = await window.webContents.printToPDF({});
+
         await fs.writeFile(pdfPath, data);
+
         log.debug(`Wrote PDF successfully to ${pdfPath}`);
         succeed = true;
     } catch (error) {
-        log.debug(`Failed to write PDF to ${pdfPath}: `, error);
+        log.error(`Failed to write PDF to ${pdfPath}: `, error);
         succeed = false;
     }
 
     window.close();
 
     return succeed;
+}
+
+async function createTempDirectory() {
+    let tempDir = '';
+    try {
+        const appPrefix = 'ttw-temp';
+        tempDir = await fs.mkdtemp(path.join(os.tmpdir(), appPrefix));
+        return tempDir;
+    } catch (error) {
+        log.error(`create temp dir failed. dir = [${tempDir}]`);
+        throw error;
+    }
+}
+
+async function deleteTempDirectory(tempDir: string) {
+    try {
+        if (!isNullOrWhiteSpace(tempDir)) {
+            fs.rm(tempDir, { recursive: true });
+        }
+    } catch (error) {
+        log.error(`An error has occurred while removing the temp dir = [${tempDir}]. Please remove it manually.`);
+        log.error(error);
+    }
 }
 
 export const mdConverter = {
