@@ -13,11 +13,11 @@ import { DateEx } from './tw/twUtility/twUtility';
 const csvUrl = `https://www8.cao.go.jp/chosei/shukujitsu/syukujitsu.csv`;
 
 let database: AppDb;
-let holidayCsvFilePath: string;
+let csvFilePath: string;
 
 function initialize(_database: AppDb) {
     database = _database;
-    holidayCsvFilePath = path.join(appFolderPath, 'holiday.csv');
+    csvFilePath = path.join(appFolderPath, 'holiday.csv');
 }
 
 export const holiday = {
@@ -60,7 +60,7 @@ async function loadHolidayCsv(lastHoliday: Holiday) {
         await database.saveHolidays(holidays);
     });
 
-    const saveFile = fs.createWriteStream(holidayCsvFilePath);
+    const saveFile = fs.createWriteStream(csvFilePath);
     https
         .get(csvUrl, response => {
             response.pipe(saveFile);

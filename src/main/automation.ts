@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import { BrowserWindow, app } from 'electron';
 import pie from 'puppeteer-in-electron';
-import puppeteer from 'puppeteer-core';
+import * as puppeteer from 'puppeteer-core';
 import { log } from './logger';
 import { ConfigManager } from './configManager';
 import { StartOrEnd } from '../common/models';
